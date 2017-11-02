@@ -21,7 +21,7 @@
     <ClCompile Include="CP_ExtractWebRI.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="CP_OperateString.cpp">
+    <ClCompile Include="CP_MyString.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,7 +29,7 @@
     <ClInclude Include="CP_ExtractWebRI.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="CP_OperateString.h">
+    <ClInclude Include="CP_MyString.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
