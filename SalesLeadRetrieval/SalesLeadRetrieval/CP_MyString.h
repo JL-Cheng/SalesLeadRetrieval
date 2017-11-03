@@ -1,4 +1,4 @@
-//实现对字符串的各种处理
+//自行定义的字符串类
 
 #pragma once
 #ifndef CP_MYSTRING_H
@@ -22,11 +22,14 @@ public:
 	void GetNext(myString T, int* next);
 	int IndexOf(myString T, int pos = 0);
 
-	//进行字符串分割，将m_str分割为不同字符串
-	void SplitString(myString s, vector<myString>& v, myString c);
+	//字符串分割，将m_str分割为不同字符串
+	void SplitString(vector<myString>& v, myString c);
 
 	//字符串拷贝,将字符串拷贝到m_str中
-	void Substring(myString str, int pos, int len);
+	void SubString(myString str, int pos, int len);
+
+	//字符串连接,将字符串连接到m_str中
+	void ConcatString(myString str);
 
 	//重载"="运算符
 	myString& operator =(const string&str);

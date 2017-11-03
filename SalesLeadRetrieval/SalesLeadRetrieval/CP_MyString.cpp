@@ -30,6 +30,7 @@ void myString::GetNext(myString T, int* next)
 	}
 }
 
+//×Ö·û´®²éÕÒ
 int myString::IndexOf(myString T,int pos)
 {
 	int i = pos;
@@ -52,7 +53,8 @@ int myString::IndexOf(myString T,int pos)
 	else return -1;
 }
 
-void myString::Substring(myString str, int pos, int len)
+//×Ö·û´®¿½±´
+void myString::SubString(myString str, int pos, int len)
 {
 	char *temp_s = new char[len + 1];
 	stringstream ss;
@@ -67,26 +69,34 @@ void myString::Substring(myString str, int pos, int len)
 	delete[]temp_s;
 }
 
-void myString::SplitString(myString s, vector<myString>& v, myString c)
+//×Ö·û´®·Ö¸î
+void myString::SplitString(vector<myString>& v, myString c)
 {
 	string::size_type pos1, pos2;
-	pos2 = s.IndexOf(c);
+	pos2 = this->IndexOf(c);
 	pos1 = 0;
 	while (string::npos != pos2)
 	{
 		myString temp_str;
-		temp_str.Substring(s, pos1, pos2 - pos1);
+		temp_str.SubString(*this, pos1, pos2 - pos1);
 		v.push_back(temp_str);
 
 		pos1 = pos2 + c.length;
-		pos2 = s.IndexOf(c, pos1);
+		pos2 = this->IndexOf(c, pos1);
 	}
-	if (pos1 != s.length)
+	if (pos1 != length)
 	{
 		myString temp_str;
-		temp_str.Substring(s, pos1, s.length - pos1);
+		temp_str.SubString(*this, pos1, length - pos1);
 		v.push_back(temp_str);
 	}
+}
+
+//×Ö·û´®Á¬½Ó
+void myString::ConcatString(myString str)
+{
+	m_str += str.m_str;
+	length += str.length;
 }
 
 myString& myString::operator=(const string &str)

@@ -1,5 +1,6 @@
 #include"CP_MyString.h"
 #include"CP_ExtractWebRI.h"
+#include"CP_MyStringList.h"
 #include<iostream>
 using namespace std;
 #include<string>
@@ -9,6 +10,7 @@ using namespace std;
 int main(int argc, char *args[])
 {
 	extractWebRI webRI;
+
 	system("pause");
 	return 0;
 }

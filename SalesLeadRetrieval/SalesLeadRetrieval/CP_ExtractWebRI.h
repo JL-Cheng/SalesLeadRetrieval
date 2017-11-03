@@ -1,4 +1,4 @@
-//类功能：1、打开CSV文件并读取相关网页信息	2、提取网页信息中重要内容
+//类功能：1、打开CSV文件并读取相关网页信息	2、提取网页内容
 
 #pragma once
 #ifndef CP_EXTRACTWEBRI_H

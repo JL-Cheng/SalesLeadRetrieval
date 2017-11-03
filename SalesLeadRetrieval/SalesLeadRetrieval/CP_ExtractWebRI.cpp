@@ -13,12 +13,13 @@ extractWebRI::~extractWebRI()
 {
 }
 
+//获取网址
 void extractWebRI::GetWebsite()//将网址存入字符串向量中
 {
 	ifstream file(FileName);
+	myString temp_str;
 	string temp_line;
-	myString myStr;//操作字符串的类
-	vector<myString> temp_str;
+	vector<myString> temp_str_vector;
 	myString separator_str(",");//分割字符串
 	myString myLine_str;//读入的每一行字符串
 	myString webSite_str;//每个网址的字符串
@@ -26,24 +27,26 @@ void extractWebRI::GetWebsite()//将网址存入字符串向量中
 	getline(file, temp_line);//去除第一行
 	while (getline(file, temp_line))
 	{
-		temp_str.clear();
+		temp_str_vector.clear();
 		webSite_str = "";
-		myStr.SplitString(temp_line, temp_str, separator_str);
-		for (int i = 1; i < temp_str[1].length - 1; i++)
+		temp_str = temp_line;
+		temp_str.SplitString(temp_str_vector, separator_str);
+		for (int i = 1; i < temp_str_vector[1].length - 1; i++)
 		{
-			webSite_str = webSite_str + temp_str[1].m_str[i];
+			webSite_str = webSite_str + temp_str_vector[1].m_str[i];
 		}
 		Website.push_back(webSite_str);
 	}
 
 }
 
+//读取网站内容
 void extractWebRI::ReadWebsite()
 {
 	CInternetSession session("HttpClient");
 	//for (int i = 0; i < Website.size(); i++)
 	//{
-	int i = 0;
+	int i = 2;
 		CHttpFile *pfile = (CHttpFile*)session.OpenURL(Website[i].m_str.data());
 		DWORD dwStatusCode;//Http请求相关联的状态号
 		pfile->QueryInfoStatusCode(dwStatusCode);
