@@ -113,14 +113,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CP_ExtractWebRI.cpp" />
+    <ClCompile Include="CP_MyStack.cpp" />
     <ClCompile Include="CP_MyString.cpp" />
     <ClCompile Include="CP_MyStringList.cpp" />
+    <ClCompile Include="CP_OperateWebRI.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CP_ExtractWebRI.h" />
+    <ClInclude Include="CP_MyStack.h" />
     <ClInclude Include="CP_MyString.h" />
     <ClInclude Include="CP_MyStringList.h" />
+    <ClInclude Include="CP_OperateWebRI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

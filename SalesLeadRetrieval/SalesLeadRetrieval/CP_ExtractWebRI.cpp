@@ -3,10 +3,7 @@
 extractWebRI::extractWebRI():
 	FileName("url.csv")
 {
-	GetWebsite();
-
-	ReadWebsite();
-	
+	GetWebsite();	
 }
 
 extractWebRI::~extractWebRI()
@@ -41,12 +38,12 @@ void extractWebRI::GetWebsite()//将网址存入字符串向量中
 }
 
 //读取网站内容
-void extractWebRI::ReadWebsite()
+void extractWebRI::ReadWebsite(vector<myString> &str_vec)
 {
 	CInternetSession session("HttpClient");
-	//for (int i = 0; i < Website.size(); i++)
-	//{
-	int i = 2;
+	for (int i = 0; i < Website.size(); i++)
+	{
+
 		CHttpFile *pfile = (CHttpFile*)session.OpenURL(Website[i].m_str.data());
 		DWORD dwStatusCode;//Http请求相关联的状态号
 		pfile->QueryInfoStatusCode(dwStatusCode);
@@ -61,14 +58,14 @@ void extractWebRI::ReadWebsite()
 			//content.TrimRight();
 			string str = content.GetBuffer(0);
 
-			ofstream file("web_data.txt");//将网页源码输出到文本文件中
-			file << str;
-			file.close();
+			//将网页源码输入到向量中
+			myString mStr(str);
+			str_vec.push_back(mStr);
 		}
 		pfile->Close();
-		delete pfile;
-		
-	//}
+		delete pfile;	
+		cout << i;
+	}
 
 	session.Close();
 }

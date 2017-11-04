@@ -14,13 +14,13 @@ myString::myString(string str):
 
 void myString::GetNext(myString T, int* next)
 {
-	int j = 0, k = 0;
+	int j = 0, k = -1;
 	int length = T.length;
 	next[0] = -1;
 
 	while (j < length)
 	{
-		if (k == 0 || T.m_str[j] == T.m_str[k])
+		if (k == -1 || T.m_str[j] == T.m_str[k])
 		{
 			++j;
 			++k;

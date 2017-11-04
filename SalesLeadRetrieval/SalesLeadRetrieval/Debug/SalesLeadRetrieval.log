@@ -1,3 +1,12 @@
-﻿  CP_MyStringList.cpp
+﻿  main.cpp
+c:\program files (x86)\vc\atlmfc\include\afx.h(38): warning C4996: 'MBCS_Support_Deprecated_In_MFC': MBCS support in MFC is deprecated and may be removed in a future version of MFC.
+  c:\program files (x86)\vc\atlmfc\include\afx.h(33): note: 参见“MBCS_Support_Deprecated_In_MFC”的声明
+  _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+  CP_ExtractWebRI.cpp
+c:\program files (x86)\vc\atlmfc\include\afx.h(38): warning C4996: 'MBCS_Support_Deprecated_In_MFC': MBCS support in MFC is deprecated and may be removed in a future version of MFC.
+  c:\program files (x86)\vc\atlmfc\include\afx.h(33): note: 参见“MBCS_Support_Deprecated_In_MFC”的声明
+  _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+e:\salesleadretrieval\salesleadretrieval\salesleadretrieval\salesleadretrieval\cp_extractwebri.cpp(44): warning C4018: “<”: 有符号/无符号不匹配
+  正在生成代码...
   SalesLeadRetrieval.vcxproj -> E:\SalesLeadRetrieval\SalesLeadRetrieval\SalesLeadRetrieval\Debug\SalesLeadRetrieval.exe
   SalesLeadRetrieval.vcxproj -> E:\SalesLeadRetrieval\SalesLeadRetrieval\SalesLeadRetrieval\Debug\SalesLeadRetrieval.pdb (Partial PDB)

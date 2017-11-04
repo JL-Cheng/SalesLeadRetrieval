@@ -1,15 +1,11 @@
-#include"CP_MyString.h"
-#include"CP_ExtractWebRI.h"
-#include"CP_MyStringList.h"
+#include"CP_OperateWebRI.h"
 #include<iostream>
 using namespace std;
-#include<string>
-#include<vector>
-
 
 int main(int argc, char *args[])
 {
-	extractWebRI webRI;
+	operateWebRI OWR(100);
+	OWR.printWebRI();
 
 	system("pause");
 	return 0;
