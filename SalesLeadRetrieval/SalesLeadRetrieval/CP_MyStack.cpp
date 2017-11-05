@@ -69,6 +69,8 @@ void myStack::Pop()
 	if (Empty())
 		return;
 	m_Stack.top--;
+	m_Stack.top->label = "";
+	m_Stack.top->No = 0;
 	return;
 }
 
