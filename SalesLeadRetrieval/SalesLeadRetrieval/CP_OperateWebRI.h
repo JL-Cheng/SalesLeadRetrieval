@@ -28,6 +28,13 @@ private:
 	int number;//网址数量
 	vector<myString> webRI_vector;//一百个网页信息的字符串向量
 	myStringList *final_list;//存储一百个网页提取关键词后的结果，分别为100个链表
+	/*myStringList WebList;//网址
+	myStringList BroadHeadingList;//发帖大类
+	myStringList SubdivisionList;//发帖小类
+	myStringList TitleList;//题目
+	myStringList ContentList;//内容
+	myStringList AuthorList;//发帖人*/
+
 };
 
 

@@ -18,6 +18,8 @@ void operateWebRI::webRIAnalysis(int num)
 	final_list[num].addNode(webRI.Website[num]);//先加入网址
 	int i = 0;
 	bool AddContent = NULL;//因为不只有一份内容，所以只添加主贴内容
+	bool AddAuthor = NULL;//只添加作者
+	bool AddDate = NULL;//添加日期
 	while (i < webRI_vector[num].length - 1)
 	{
 		if (webRI_vector[num].m_str[i] == '<')//是一个标签
@@ -27,8 +29,8 @@ void operateWebRI::webRIAnalysis(int num)
 			myString tempLabel;
 			tempData = stack->Top();//获取栈顶标签
 
-			tempLabel = "<div class=\"z\">";
-			if (tempData.label.IndexOf(tempLabel)!=-1)//有发帖大类、发帖小类和标题
+			tempLabel = "<div class=\"z\">";//有发帖大类、发帖小类和标题
+			if (tempData.label.IndexOf(tempLabel)!=-1)
 			{
 				int temp_num = 0;//获取的信息数
 				while (true)
@@ -50,7 +52,7 @@ void operateWebRI::webRIAnalysis(int num)
 							}
 							i = j;
 							i--;
-							final_list[num].addNode(str);
+							final_list[num].addNode(str); 
 						}
 						if (temp_num == 5)
 						{
@@ -63,8 +65,8 @@ void operateWebRI::webRIAnalysis(int num)
 				}
 			}
 
-			tempLabel = "<td class=\"t_f\"";
-			if (tempData.label.IndexOf(tempLabel) != -1&&!AddContent)//有发帖内容且未添加
+			tempLabel = "<td class=\"t_f\"";//有发帖内容且未添加
+			if (tempData.label.IndexOf(tempLabel) != -1&&!AddContent)
 			{
 				AddContent = true;
 				int temp_num = 0;
@@ -143,6 +145,65 @@ void operateWebRI::webRIAnalysis(int num)
 				}
 			}
 
+			tempLabel = "<div class=\"authi\">";//有作者
+			if (tempData.label.IndexOf(tempLabel) != -1 && !AddAuthor)
+			{
+				AddAuthor = true;
+				while (true)
+				{
+					if (webRI_vector[num].m_str[i] == '<')
+					{
+						stack->Push(webRI_vector[num], i);
+						continue;
+					}
+					else
+					{
+						myString str;//存储信息
+						int j = i;
+						while (webRI_vector[num].m_str[j] != '<')
+						{
+							str = str + webRI_vector[num].m_str[j];
+							j++;
+						}
+						i = j;
+						final_list[num].addNode(str);
+						stack->Push(webRI_vector[num], i);
+						break;
+					}
+				}
+			}
+
+			tempLabel = "<em id"; //有日期
+			if (tempData.label.IndexOf(tempLabel) != -1 && !AddDate)
+			{
+				while (true)
+				{
+					if (webRI_vector[num].m_str[i] == '<')
+					{
+						stack->Push(webRI_vector[num], i);
+						break;
+					}
+					else if(!AddDate&&webRI_vector[num].m_str[i]>='0'&& webRI_vector[num].m_str[i]<='9')
+					{
+						myString str;//存储信息
+						int j = i;
+						while (webRI_vector[num].m_str[j] != ' ')
+						{
+							str = str + webRI_vector[num].m_str[j];
+							j++;
+						}
+						i = j;
+						final_list[num].addNode(str);
+						AddDate = true;
+					}
+					else
+					{
+						i++;
+						continue;
+					}
+				}
+			}
+
 		}
 		else
 		{
@@ -157,10 +218,11 @@ void operateWebRI::printWebRI()
 {
 	ofstream ofile;
 	ofile.open("result.csv", ios::out | ios::trunc);
-	ofile << "序号,网址,发帖大类,发帖小类,发帖标题,发帖内容" << endl;
+	ofile << "序号,网址,发帖大类,发帖小类,发帖标题,发帖人,发帖内容" << endl;
 	for (int i = 0; i < number; i++)
 	{
 		ofile << i << ",";//输出序号
+		cout << i;
 		myStringNode *temp_node = final_list[i].head->next;
 		while (temp_node != NULL)
 		{
