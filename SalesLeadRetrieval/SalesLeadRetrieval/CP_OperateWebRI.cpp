@@ -20,6 +20,8 @@ void operateWebRI::webRIAnalysis(int num)
 	bool AddContent = NULL;//因为不只有一份内容，所以只添加主贴内容
 	bool AddAuthor = NULL;//只添加作者
 	bool AddDate = NULL;//添加日期
+	bool AddLabel = NULL;//添加标签
+	bool AddTitle = NULL;
 	while (i < webRI_vector[num].length - 1)
 	{
 		if (webRI_vector[num].m_str[i] == '<')//是一个标签
@@ -30,7 +32,7 @@ void operateWebRI::webRIAnalysis(int num)
 			tempData = stack->Top();//获取栈顶标签
 
 			tempLabel = "<div class=\"z\">";//有发帖大类、发帖小类和标题
-			if (tempData.label.IndexOf(tempLabel)!=-1)
+			if (tempData.label.IndexOf(tempLabel)!=-1 && !AddTitle)
 			{
 				int temp_num = 0;//获取的信息数
 				while (true)
@@ -56,6 +58,7 @@ void operateWebRI::webRIAnalysis(int num)
 						}
 						if (temp_num == 5)
 						{
+							AddTitle = true;
 							stack->Push(webRI_vector[num], i);
 							break;
 						}//得到三条有用信息后退出
@@ -204,6 +207,43 @@ void operateWebRI::webRIAnalysis(int num)
 				}
 			}
 
+			tempLabel = "<div class=\"ts z h1\">"; //有标签
+			if (tempData.label.IndexOf(tempLabel) != -1 && !AddLabel)
+			{
+				while (true)
+				{
+					if (webRI_vector[num].m_str[i] == '<')
+					{
+						stack->Push(webRI_vector[num], i);
+						continue;
+					}
+					else if(webRI_vector[num].m_str[i] == '[')
+					{
+						myString str;//存储信息
+						int j = i;
+						while (webRI_vector[num].m_str[j] != '<')
+						{
+							str = str + webRI_vector[num].m_str[j];
+							j++;
+						}
+						i = j;
+						final_list[num].addNode(str);
+						AddLabel = true;
+						break;
+					}
+					else
+					{
+						i++;
+						continue;
+					}
+
+				}
+			}
+
+			if (AddTitle&&AddContent&&AddAuthor&&AddDate&&AddLabel)
+			{
+				break;
+			}
 		}
 		else
 		{
@@ -218,10 +258,10 @@ void operateWebRI::printWebRI()
 {
 	ofstream ofile;
 	ofile.open("result.csv", ios::out | ios::trunc);
-	ofile << "序号,网址,发帖大类,发帖小类,发帖标题,发帖人,发帖内容" << endl;
+	ofile << "序号,网址,发帖大类,发帖小类,发帖标题,发帖类型,发帖人,发帖时间,发帖内容" << endl;
 	for (int i = 0; i < number; i++)
 	{
-		ofile << i << ",";//输出序号
+		ofile << i + 1 << ",";//输出序号
 		cout << i;
 		myStringNode *temp_node = final_list[i].head->next;
 		while (temp_node != NULL)

@@ -33,6 +33,9 @@
     <ClCompile Include="CP_OperateWebRI.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="CP_MyDictionary.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CP_ExtractWebRI.h">
@@ -48,6 +51,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="CP_OperateWebRI.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CP_MyDictionary.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
