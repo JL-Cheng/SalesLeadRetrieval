@@ -38,6 +38,9 @@ public:
 	//重载"+"运算符
 	myString& operator +(const char& ch);
 
+	//重载"[]"下标运算符
+	char& operator [](int n) { return m_str[n]; }
+
 public: 
 	string m_str;
 	int length;

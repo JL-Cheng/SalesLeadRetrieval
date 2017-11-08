@@ -30,7 +30,7 @@ void extractWebRI::GetWebsite()//将网址存入字符串向量中
 		temp_str.SplitString(temp_str_vector, separator_str);
 		for (int i = 1; i < temp_str_vector[1].length - 1; i++)
 		{
-			webSite_str = webSite_str + temp_str_vector[1].m_str[i];
+			webSite_str = webSite_str + temp_str_vector[1][i];
 		}
 		Website.push_back(webSite_str);
 	}
@@ -41,6 +41,7 @@ void extractWebRI::GetWebsite()//将网址存入字符串向量中
 void extractWebRI::ReadWebsite(vector<myString> &str_vec)
 {
 	CInternetSession session("HttpClient");
+	cout << "正在提取网址..." << endl;
 	for (int i = 0; i < Website.size(); i++)
 	{
 
@@ -55,7 +56,6 @@ void extractWebRI::ReadWebsite(vector<myString> &str_vec)
 			{
 				content += data + "\r\n";
 			}
-			//content.TrimRight();
 			string str = content.GetBuffer(0);
 
 			//将网页源码输入到向量中
@@ -64,7 +64,7 @@ void extractWebRI::ReadWebsite(vector<myString> &str_vec)
 		}
 		pfile->Close();
 		delete pfile;	
-		cout << i;
+		cout << i << " ";
 	}
 
 	session.Close();

@@ -24,8 +24,8 @@ void myStack::Push(myString S, int &start_i)
 	int j = start_i;
 	while (true)
 	{
-		tempString = tempString + S.m_str[j];
-		if (S.m_str[j] == '>') break;
+		tempString = tempString + S[j];
+		if (S[j] == '>') break;
 		j++;
 	}
 

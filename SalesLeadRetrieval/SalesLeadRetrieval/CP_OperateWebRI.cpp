@@ -6,10 +6,14 @@ operateWebRI::operateWebRI(int num)
 	number = num;
 	webRI.ReadWebsite(webRI_vector);
 
+	cout << "正在操作网页信息..." << endl << "已完成的网页:" << endl;
 	for (int i = 0; i < num; i++)
 	{
 		webRIAnalysis(i);
+		webRISegment(i);
+		cout << i + 1 << " ";
 	}
+	cout << endl;
 }
 
 void operateWebRI::webRIAnalysis(int num)
@@ -24,7 +28,7 @@ void operateWebRI::webRIAnalysis(int num)
 	bool AddTitle = NULL;
 	while (i < webRI_vector[num].length - 1)
 	{
-		if (webRI_vector[num].m_str[i] == '<')//是一个标签
+		if (webRI_vector[num][i] == '<')//是一个标签
 		{
 			stack->Push(webRI_vector[num], i);//将标签压入栈
 			stackData tempData;
@@ -37,7 +41,7 @@ void operateWebRI::webRIAnalysis(int num)
 				int temp_num = 0;//获取的信息数
 				while (true)
 				{
-					if (webRI_vector[num].m_str[i] == '<')
+					if (webRI_vector[num][i] == '<')
 					{
 						stack->Push(webRI_vector[num], i);
 						tempData = stack->Top();
@@ -47,9 +51,9 @@ void operateWebRI::webRIAnalysis(int num)
 						{
 							myString str;//存储信息
 							int j = i;
-							while (webRI_vector[num].m_str[j] != '<')
+							while (webRI_vector[num][j] != '<')
 							{
-								str = str + webRI_vector[num].m_str[j];
+								str = str + webRI_vector[num][j];
 								j++;
 							}
 							i = j;
@@ -77,7 +81,7 @@ void operateWebRI::webRIAnalysis(int num)
 				myString unicodeStr = "";//记录unicode的编码
 				while (true)
 				{
-					if (webRI_vector[num].m_str[i] == '<')
+					if (webRI_vector[num][i] == '<')
 					{
 						stack->Push(webRI_vector[num], i);
 						if (temp_num == 0)
@@ -89,38 +93,38 @@ void operateWebRI::webRIAnalysis(int num)
 						{
 							for (int temp_l = 0; temp_l < unicodeStr.length; temp_l++)
 							{
-								str = str + unicodeStr.m_str[temp_l];
+								str = str + unicodeStr[temp_l];
 							}
 						}
 						final_list[num].addNode(str);
 						break;
 					}
-					else if (webRI_vector[num].m_str[i] == '\n' || webRI_vector[num].m_str[i] == '\r' || webRI_vector[num].m_str[i] == ' ')
+					else if (webRI_vector[num][i] == '\n' || webRI_vector[num][i] == '\r' || webRI_vector[num][i] == ' ')
 					{
 						i++;
 						continue;
 					}
-					else if(webRI_vector[num].m_str[i] == '&')//开始unicode编码
+					else if(webRI_vector[num][i] == '&')//开始unicode编码
 					{
 						i++;
 						while (true)
 						{
-							if (webRI_vector[num].m_str[i] != ';')
+							if (webRI_vector[num][i] != ';')
 							{
-								unicodeStr = unicodeStr + webRI_vector[num].m_str[i];
+								unicodeStr = unicodeStr + webRI_vector[num][i];
 								i++;
 							}
-							else if (webRI_vector[num].m_str[i] == ';')//unicode码结束
+							else if (webRI_vector[num][i] == ';')//unicode码结束
 							{
 								unsigned short number = 0;
 								char czChinese[3];
 								wchar_t wcChinese[2];
 								myString spaceStr = "nbsp";
-								if (unicodeStr.m_str[0] == '#')
+								if (unicodeStr[0] == '#')
 								{
 									for (int k = 1; k < unicodeStr.length; k++)
 									{
-										number = number * 10 + unicodeStr.m_str[k] - '0';
+										number = number * 10 + unicodeStr[k] - '0';
 									}
 									wcChinese[0] = number;
 									wcChinese[1] = 0;
@@ -141,7 +145,15 @@ void operateWebRI::webRIAnalysis(int num)
 					}
 					else//是其他字符
 					{
-						str = str + webRI_vector[num].m_str[i];
+						if (webRI_vector[num][i] == ',')//是英文逗号,防止输出时分割的错误
+						{
+							myString s = "，";
+							str = str + s[0];
+							str = str + s[1];
+							i++;
+							continue;
+						}
+						str = str + webRI_vector[num][i];
 						i++;
 						continue;
 					}
@@ -154,7 +166,7 @@ void operateWebRI::webRIAnalysis(int num)
 				AddAuthor = true;
 				while (true)
 				{
-					if (webRI_vector[num].m_str[i] == '<')
+					if (webRI_vector[num][i] == '<')
 					{
 						stack->Push(webRI_vector[num], i);
 						continue;
@@ -163,9 +175,9 @@ void operateWebRI::webRIAnalysis(int num)
 					{
 						myString str;//存储信息
 						int j = i;
-						while (webRI_vector[num].m_str[j] != '<')
+						while (webRI_vector[num][j] != '<')
 						{
-							str = str + webRI_vector[num].m_str[j];
+							str = str + webRI_vector[num][j];
 							j++;
 						}
 						i = j;
@@ -181,18 +193,18 @@ void operateWebRI::webRIAnalysis(int num)
 			{
 				while (true)
 				{
-					if (webRI_vector[num].m_str[i] == '<')
+					if (webRI_vector[num][i] == '<')
 					{
 						stack->Push(webRI_vector[num], i);
 						break;
 					}
-					else if(!AddDate&&webRI_vector[num].m_str[i]>='0'&& webRI_vector[num].m_str[i]<='9')
+					else if(!AddDate&&webRI_vector[num][i]>='0'&& webRI_vector[num][i]<='9')
 					{
 						myString str;//存储信息
 						int j = i;
-						while (webRI_vector[num].m_str[j] != ' ')
+						while (webRI_vector[num][j] != ' ')
 						{
-							str = str + webRI_vector[num].m_str[j];
+							str = str + webRI_vector[num][j];
 							j++;
 						}
 						i = j;
@@ -212,18 +224,18 @@ void operateWebRI::webRIAnalysis(int num)
 			{
 				while (true)
 				{
-					if (webRI_vector[num].m_str[i] == '<')
+					if (webRI_vector[num][i] == '<')
 					{
 						stack->Push(webRI_vector[num], i);
 						continue;
 					}
-					else if(webRI_vector[num].m_str[i] == '[')
+					else if(webRI_vector[num][i] == '[')
 					{
 						myString str;//存储信息
 						int j = i;
-						while (webRI_vector[num].m_str[j] != '<')
+						while (webRI_vector[num][j] != '<')
 						{
-							str = str + webRI_vector[num].m_str[j];
+							str = str + webRI_vector[num][j];
 							j++;
 						}
 						i = j;
@@ -254,11 +266,47 @@ void operateWebRI::webRIAnalysis(int num)
 	cout << num;
 }
 
+void operateWebRI::webRISegment(int num)
+{
+	myString title;
+	myString content;
+	myString segmentFinal;
+	myStringNode *temp_node = final_list[num].head->next;
+	if (temp_node == NULL)return;
+	int a = 1;
+
+	while (true)
+	{
+		temp_node = temp_node->next;
+		a++;
+		if (a == 4)
+		{
+			title = temp_node->data;
+		}
+		if (a == 8)
+		{
+			content = temp_node->data;
+		}
+		if (temp_node == NULL)break;
+	}
+
+	segmentFinal = title;
+	for (int i = 0; i < content.length; i++)
+	{
+		segmentFinal = segmentFinal + content[i];
+	}
+
+	segmentFinal = dictionary.SegmentSentence(segmentFinal);
+
+	final_list[num].addNode(segmentFinal);
+
+}
+
 void operateWebRI::printWebRI()
 {
 	ofstream ofile;
 	ofile.open("result.csv", ios::out | ios::trunc);
-	ofile << "序号,网址,发帖大类,发帖小类,发帖标题,发帖类型,发帖人,发帖时间,发帖内容" << endl;
+	ofile << "序号,网址,发帖大类,发帖小类,发帖标题,发帖类型,发帖人,发帖时间,发帖内容,分词结果" << endl;
 	for (int i = 0; i < number; i++)
 	{
 		ofile << i + 1 << ",";//输出序号
@@ -272,5 +320,6 @@ void operateWebRI::printWebRI()
 		ofile << endl;
 	}
 	ofile.close();
+	cout << "已输出结果。" << endl;
 }
 

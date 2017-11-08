@@ -20,7 +20,7 @@ void myString::GetNext(myString T, int* next)
 
 	while (j < length)
 	{
-		if (k == -1 || T.m_str[j] == T.m_str[k])
+		if (k == -1 || T[j] == T[k])
 		{
 			++j;
 			++k;
@@ -41,7 +41,7 @@ int myString::IndexOf(myString T,int pos)
 
 	while (i < length&&j < length2)
 	{
-		if (j == -1 || m_str[i] == T.m_str[j])
+		if (j == -1 || m_str[i] == T[j])
 		{
 			++i;
 			++j;
@@ -60,7 +60,7 @@ void myString::SubString(myString str, int pos, int len)
 	stringstream ss;
 	for (int i = 0, j = pos; i < len; i++, j++)
 	{
-		temp_s[i] = str.m_str[j];
+		temp_s[i] = str[j];
 	}
 	temp_s[len] = '\0';
 	ss << temp_s;

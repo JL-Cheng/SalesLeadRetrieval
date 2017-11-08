@@ -9,6 +9,7 @@
 #include"CP_MyStack.h"
 #include"CP_MyString.h"
 #include"CP_MyStringList.h"
+#include"CP_MyDictionary.h"
 using namespace std;
 
 class operateWebRI
@@ -23,17 +24,15 @@ public:
 	//输出网页提取内容
 	void printWebRI();
 
+	//进行中文分词
+	void webRISegment(int num);
+
 private:
 	extractWebRI webRI;
+	myDictionary dictionary;
 	int number;//网址数量
 	vector<myString> webRI_vector;//一百个网页信息的字符串向量
 	myStringList *final_list;//存储一百个网页提取关键词后的结果，分别为100个链表
-	/*myStringList WebList;//网址
-	myStringList BroadHeadingList;//发帖大类
-	myStringList SubdivisionList;//发帖小类
-	myStringList TitleList;//题目
-	myStringList ContentList;//内容
-	myStringList AuthorList;//发帖人*/
 
 };
 
