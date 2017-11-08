@@ -2,7 +2,8 @@
 
 operateWebRI::operateWebRI(int num)
 {
-	final_list = new myStringList[num];
+	analysis_list = new myStringList[num];
+	segment_list = new myStringList[num];
 	number = num;
 	webRI.ReadWebsite(webRI_vector);
 
@@ -19,7 +20,7 @@ operateWebRI::operateWebRI(int num)
 void operateWebRI::webRIAnalysis(int num)
 {
 	myStack *stack = new myStack(1000);
-	final_list[num].addNode(webRI.Website[num]);//先加入网址
+	analysis_list[num].addNode(webRI.Website[num]);//先加入网址
 	int i = 0;
 	bool AddContent = NULL;//因为不只有一份内容，所以只添加主贴内容
 	bool AddAuthor = NULL;//只添加作者
@@ -58,7 +59,7 @@ void operateWebRI::webRIAnalysis(int num)
 							}
 							i = j;
 							i--;
-							final_list[num].addNode(str); 
+							analysis_list[num].addNode(str); 
 						}
 						if (temp_num == 5)
 						{
@@ -96,7 +97,7 @@ void operateWebRI::webRIAnalysis(int num)
 								str = str + unicodeStr[temp_l];
 							}
 						}
-						final_list[num].addNode(str);
+						analysis_list[num].addNode(str);
 						break;
 					}
 					else if (webRI_vector[num][i] == '\n' || webRI_vector[num][i] == '\r' || webRI_vector[num][i] == ' ')
@@ -181,7 +182,7 @@ void operateWebRI::webRIAnalysis(int num)
 							j++;
 						}
 						i = j;
-						final_list[num].addNode(str);
+						analysis_list[num].addNode(str);
 						stack->Push(webRI_vector[num], i);
 						break;
 					}
@@ -208,7 +209,7 @@ void operateWebRI::webRIAnalysis(int num)
 							j++;
 						}
 						i = j;
-						final_list[num].addNode(str);
+						analysis_list[num].addNode(str);
 						AddDate = true;
 					}
 					else
@@ -239,7 +240,7 @@ void operateWebRI::webRIAnalysis(int num)
 							j++;
 						}
 						i = j;
-						final_list[num].addNode(str);
+						analysis_list[num].addNode(str);
 						AddLabel = true;
 						break;
 					}
@@ -252,10 +253,6 @@ void operateWebRI::webRIAnalysis(int num)
 				}
 			}
 
-			if (AddTitle&&AddContent&&AddAuthor&&AddDate&&AddLabel)
-			{
-				break;
-			}
 		}
 		else
 		{
@@ -263,7 +260,7 @@ void operateWebRI::webRIAnalysis(int num)
 			continue;
 		}
 	}
-	cout << num;
+
 }
 
 void operateWebRI::webRISegment(int num)
@@ -271,7 +268,7 @@ void operateWebRI::webRISegment(int num)
 	myString title;
 	myString content;
 	myString segmentFinal;
-	myStringNode *temp_node = final_list[num].head->next;
+	myStringNode *temp_node = analysis_list[num].head->next;
 	if (temp_node == NULL)return;
 	int a = 1;
 
@@ -296,9 +293,7 @@ void operateWebRI::webRISegment(int num)
 		segmentFinal = segmentFinal + content[i];
 	}
 
-	segmentFinal = dictionary.SegmentSentence(segmentFinal);
-
-	final_list[num].addNode(segmentFinal);
+	dictionary.SegmentSentence(segmentFinal, segment_list[num]);
 
 }
 
@@ -310,13 +305,21 @@ void operateWebRI::printWebRI()
 	for (int i = 0; i < number; i++)
 	{
 		ofile << i + 1 << ",";//输出序号
-		cout << i;
-		myStringNode *temp_node = final_list[i].head->next;
+		myStringNode *temp_node = analysis_list[i].head->next;
 		while (temp_node != NULL)
 		{
 			ofile << temp_node->data.m_str << ",";
 			temp_node = temp_node->next;
 		}
+
+		//输出分词结果
+		temp_node = segment_list[i].head->next;
+		while (temp_node != NULL)
+		{
+			ofile << temp_node->data.m_str << " ";
+			temp_node = temp_node->next;
+		}
+
 		ofile << endl;
 	}
 	ofile.close();

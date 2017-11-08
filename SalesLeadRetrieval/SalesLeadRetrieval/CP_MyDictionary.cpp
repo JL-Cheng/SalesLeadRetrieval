@@ -8,6 +8,7 @@ myDictionary::myDictionary()
 	//录入词库的词和专业用语
 	ifstream infile1("lexicon.dic");//打开词库
 	if (!infile1.is_open())exit(-1);//打开文件失败，返回
+	cout << "正在录入词库..." << endl;
 	while (getline(infile1, s))
 	{
 		HashDictionary.insert(pair(s, 1));
@@ -31,7 +32,7 @@ int myDictionary::FindWord(myString str)
 		return 0;
 }
 
-myString myDictionary::SegmentSentence(myString strToSegment)
+void myDictionary::SegmentSentence(myString strToSegment, myStringList &List)
 {
 	myString strHandled;//将要分词的字符串进行预处理，只保留汉字
 	myString finalStr;//最后的结果
@@ -86,15 +87,10 @@ myString myDictionary::SegmentSentence(myString strToSegment)
 		}
 		if (tempStr.length > 2 && finalStr.IndexOf(tempStr)==-1)//存入不重复的词
 		{
-			tempStr = tempStr + ' ';
-			for (int i = 0; i < tempStr.length; i++)
-			{
-				finalStr = finalStr + tempStr[i];
-			}
+			List.addNode(tempStr);
 		}
 		strHandled.SubString(strHandled, 0, strHandled.length - tempLen);
 	}
 
-	return finalStr;
 
 }

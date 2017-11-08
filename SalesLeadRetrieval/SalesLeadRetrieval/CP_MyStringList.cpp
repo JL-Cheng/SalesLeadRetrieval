@@ -4,7 +4,7 @@ myStringList::myStringList()
 {
 	head = new myStringNode;
 	head->data = "";
-	head->next = head;
+	head->next = NULL;
 	end = head;
 	length = 0;
 }

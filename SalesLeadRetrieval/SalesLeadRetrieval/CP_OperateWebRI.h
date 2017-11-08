@@ -32,7 +32,8 @@ private:
 	myDictionary dictionary;
 	int number;//网址数量
 	vector<myString> webRI_vector;//一百个网页信息的字符串向量
-	myStringList *final_list;//存储一百个网页提取关键词后的结果，分别为100个链表
+	myStringList *analysis_list;//存储一百个网页提取关键词后的结果，分别为100个链表
+	myStringList *segment_list;//存储分词之后的结果
 
 };
 

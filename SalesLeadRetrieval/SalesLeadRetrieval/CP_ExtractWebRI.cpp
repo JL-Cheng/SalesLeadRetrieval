@@ -64,7 +64,6 @@ void extractWebRI::ReadWebsite(vector<myString> &str_vec)
 		}
 		pfile->Close();
 		delete pfile;	
-		cout << i << " ";
 	}
 
 	session.Close();

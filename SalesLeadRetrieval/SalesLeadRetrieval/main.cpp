@@ -7,6 +7,5 @@ int main(int argc, char *args[])
 	operateWebRI OWR(100);
 	OWR.printWebRI();
 
-	system("pause");
 	return 0;
 }
