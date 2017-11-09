@@ -1,7 +1,7 @@
 #include"CP_ExtractWebRI.h"
 
 extractWebRI::extractWebRI():
-	FileName("url.csv")
+	FileName("input/url.csv")
 {
 	GetWebsite();	
 }

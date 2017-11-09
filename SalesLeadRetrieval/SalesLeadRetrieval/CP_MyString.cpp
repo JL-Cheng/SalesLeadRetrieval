@@ -36,7 +36,8 @@ int myString::IndexOf(myString T,int pos)
 	int i = pos;
 	int j = 0;
 	int length2 = T.length;
-	int *next = new int[length2];
+	int *next = new int[length2 + 1];
+	int final_num;
 	GetNext(T, next);
 
 	while (i < length&&j < length2)
@@ -48,9 +49,12 @@ int myString::IndexOf(myString T,int pos)
 		}
 		else j = next[j];
 	}
-
-	if (j >= length2) return i - length2;
-	else return -1;
+	if (j >= length2)
+		final_num = i - length2;
+	else
+		final_num = -1;
+	delete[] next;
+	return final_num;
 }
 
 //×Ö·û´®¿½±´

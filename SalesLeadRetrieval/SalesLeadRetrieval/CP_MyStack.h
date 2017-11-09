@@ -26,7 +26,7 @@ class myStack
 {
 public:
 	myStack(int max_size);
-	~myStack() {}
+	~myStack();
 
 	//初始化栈
 	void Init();
@@ -35,7 +35,7 @@ public:
 	void Push(myString S, int &start_i);
 
 	//将标签退栈
-	void Pop();
+	void Pop(int num);
 
 	//获取栈顶元素,内联函数
 	stackData Top()

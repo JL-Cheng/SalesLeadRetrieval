@@ -73,7 +73,7 @@ void operateWebRI::webRIAnalysis(int num)
 				}
 			}
 
-			tempLabel = "<td class=\"t_f\"";//有发帖内容且未添加
+			tempLabel = "<td class=\"t_f\"";//有发帖内容
 			if (tempData.label.IndexOf(tempLabel) != -1&&!AddContent)
 			{
 				AddContent = true;
@@ -161,7 +161,7 @@ void operateWebRI::webRIAnalysis(int num)
 				}
 			}
 
-			tempLabel = "<div class=\"authi\">";//有作者
+			tempLabel = "<div class=\"authi\">";//有发帖作者
 			if (tempData.label.IndexOf(tempLabel) != -1 && !AddAuthor)
 			{
 				AddAuthor = true;
@@ -189,7 +189,7 @@ void operateWebRI::webRIAnalysis(int num)
 				}
 			}
 
-			tempLabel = "<em id"; //有日期
+			tempLabel = "<em id"; //有发帖日期
 			if (tempData.label.IndexOf(tempLabel) != -1 && !AddDate)
 			{
 				while (true)
@@ -220,7 +220,7 @@ void operateWebRI::webRIAnalysis(int num)
 				}
 			}
 
-			tempLabel = "<div class=\"ts z h1\">"; //有标签
+			tempLabel = "<div class=\"ts z h1\">"; //有发帖类型
 			if (tempData.label.IndexOf(tempLabel) != -1 && !AddLabel)
 			{
 				while (true)
@@ -260,7 +260,7 @@ void operateWebRI::webRIAnalysis(int num)
 			continue;
 		}
 	}
-
+	delete stack;
 }
 
 void operateWebRI::webRISegment(int num)
@@ -300,7 +300,7 @@ void operateWebRI::webRISegment(int num)
 void operateWebRI::printWebRI()
 {
 	ofstream ofile;
-	ofile.open("result.csv", ios::out | ios::trunc);
+	ofile.open("output/result.csv", ios::out | ios::trunc);
 	ofile << "序号,网址,发帖大类,发帖小类,发帖标题,发帖类型,发帖人,发帖时间,发帖内容,分词结果" << endl;
 	for (int i = 0; i < number; i++)
 	{

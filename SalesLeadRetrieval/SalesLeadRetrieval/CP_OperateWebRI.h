@@ -16,7 +16,11 @@ class operateWebRI
 {
 public:
 	operateWebRI(int num);//num为网页数量
-	~operateWebRI() {}
+	~operateWebRI()	
+	{
+		//delete analysis_list;
+		//delete segment_list;
+	}
 
 	//对指定网页内容进行分析提取出关键内容
 	void webRIAnalysis(int num);
