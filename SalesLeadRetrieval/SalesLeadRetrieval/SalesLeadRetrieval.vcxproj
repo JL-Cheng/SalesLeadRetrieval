@@ -114,6 +114,7 @@
   <ItemGroup>
     <ClCompile Include="CP_ExtractWebRI.cpp" />
     <ClCompile Include="CP_MyDictionary.cpp" />
+    <ClCompile Include="CP_MyDocumentList.cpp" />
     <ClCompile Include="CP_MyStack.cpp" />
     <ClCompile Include="CP_MyString.cpp" />
     <ClCompile Include="CP_MyStringList.cpp" />
@@ -122,7 +123,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CP_ExtractWebRI.h" />
+    <ClInclude Include="CP_MyAVL.h" />
     <ClInclude Include="CP_MyDictionary.h" />
+    <ClInclude Include="CP_MyDocumentList.h" />
     <ClInclude Include="CP_MyStack.h" />
     <ClInclude Include="CP_MyString.h" />
     <ClInclude Include="CP_MyStringList.h" />

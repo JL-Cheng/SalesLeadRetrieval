@@ -16,11 +16,7 @@ class operateWebRI
 {
 public:
 	operateWebRI(int num);//num为网页数量
-	~operateWebRI()	
-	{
-		//delete analysis_list;
-		//delete segment_list;
-	}
+	~operateWebRI()	{}
 
 	//对指定网页内容进行分析提取出关键内容
 	void webRIAnalysis(int num);
@@ -35,8 +31,8 @@ private:
 	extractWebRI webRI;
 	myDictionary dictionary;
 	int number;//网址数量
-	vector<myString> webRI_vector;//一百个网页信息的字符串向量
-	myStringList *analysis_list;//存储一百个网页提取关键词后的结果，分别为100个链表
+	vector<myString> webRI_vector;//num个网页信息的字符串向量
+	myStringList *analysis_list;//存储num个网页提取关键词后的结果，分别为num个链表
 	myStringList *segment_list;//存储分词之后的结果
 
 };

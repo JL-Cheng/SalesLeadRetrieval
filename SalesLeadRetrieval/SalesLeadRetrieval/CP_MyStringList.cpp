@@ -48,12 +48,14 @@ void myStringList::removeNode(myString str)
 		end = tempNode1;
 		delete tempNode2;
 		tempNode1->next = NULL;
+		length--;
 	}
 	else
 	{
 		myStringNode *tempNode2 = tempNode1->next;
 		tempNode1->next = tempNode1->next->next;
 		delete tempNode2;
+		length--;
 	}
 }
 
