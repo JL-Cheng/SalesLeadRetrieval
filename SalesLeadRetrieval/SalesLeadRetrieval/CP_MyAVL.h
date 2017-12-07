@@ -63,6 +63,9 @@ private:
 	//寻找与p结点紧邻且比p结点No大的结点
 	myAVLNode *nextNode(myAVLNode *p);
 
+	//删除一棵二叉树
+	void deleteAVLTree(myAVLTree T);
+
 public:
 	myAVLTree tree;
 

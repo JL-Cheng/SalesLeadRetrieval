@@ -39,6 +39,9 @@
     <ClCompile Include="CP_MyDocumentList.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="CP_MyAVL.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CP_ExtractWebRI.h">

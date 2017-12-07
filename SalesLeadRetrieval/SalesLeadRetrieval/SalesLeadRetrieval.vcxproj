@@ -113,6 +113,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CP_ExtractWebRI.cpp" />
+    <ClCompile Include="CP_MyAVL.cpp" />
     <ClCompile Include="CP_MyDictionary.cpp" />
     <ClCompile Include="CP_MyDocumentList.cpp" />
     <ClCompile Include="CP_MyStack.cpp" />
