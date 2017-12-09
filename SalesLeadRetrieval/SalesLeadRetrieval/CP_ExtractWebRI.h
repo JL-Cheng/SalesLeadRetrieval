@@ -19,7 +19,7 @@ using namespace std;
 class extractWebRI
 {
 public:
-	extractWebRI();
+	extractWebRI(int num);
 	~extractWebRI();
 
 	void ReadWebsite(vector<myString> &str_vec);//提取网页源码
@@ -28,8 +28,9 @@ public:
 	vector<myString> Website;//存储一百个网页地址
 
 private:
-	void GetWebsite();//读取CSV文件中100个网址
+	void GetWebsite();//读取CSV文件中num个网址
 	char* FileName;//打开文件的文件名
+	int number;
 
 };
 

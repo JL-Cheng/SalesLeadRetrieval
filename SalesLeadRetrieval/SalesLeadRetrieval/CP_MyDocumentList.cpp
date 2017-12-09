@@ -3,12 +3,11 @@
 myDocumentList::myDocumentList()
 {
 	head = new myDocumentNode;
-	head->ID = 0;
+	head->ID = -1;
 	head->number = 0;
 	head->content = "";
 	head->title = "";
 	head->website = "";
-	head->word_str = "";
 	head->next = NULL;
 	end = head;
 	length = 0;
@@ -30,12 +29,40 @@ myDocumentList::~myDocumentList()
 	head = NULL;
 }
 
-void myDocumentList::addNode(myDocumentNode *doc)
+void myDocumentList::addNode(myDocumentNode *doc)//按number由高到低的顺序排列插入
 {
+	if (length == 0)
+	{
+		end->next = doc;
+		end = doc;
+		end->next = NULL;
+	}
+	else
+	{
+		myDocumentNode *p = head, *q = head->next;
+		while (q)
+		{
+			if (q->number >= doc->number)
+			{
+				q = q->next;
+				p = p->next;
+			}
+			else
+				break;
+		}
+		if (!q)
+		{
+			end->next = doc;
+			end = doc;
+			end->next = NULL;
+		}
+		else
+		{
+			p->next = doc;
+			doc->next = q;
+		}
+	}
 	length++;
-	end->next = doc;
-	end = doc;
-	end->next = NULL;
 }
 
 void myDocumentList::removeNode(int ID)
@@ -72,15 +99,13 @@ myDocumentNode* myDocumentList::searchNode(int ID)
 		return node;
 }
 
-void myDocumentList::editNode(int ID, myString word_str, myString title, myString content, myString website, int number=0)
+void myDocumentList::editNode(int ID, myString title, myString content, myString website, int number)
 {
 	myDocumentNode *node = searchNode(ID);
 	if (node == NULL)
 		return;//该结点不存在
 	else//进行修改
 	{
-		if (word_str.length != 0)
-			node->word_str = word_str;
 		if (title.length != 0)
 			node->title = title;
 		if (content.length != 0)

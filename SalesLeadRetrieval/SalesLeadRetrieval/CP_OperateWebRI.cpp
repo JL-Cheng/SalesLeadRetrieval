@@ -5,22 +5,24 @@ operateWebRI::operateWebRI(int num)
 	analysis_list = new myStringList[num];
 	segment_list = new myStringList[num];
 	number = num;
-	webRI.ReadWebsite(webRI_vector);
+	webRI = new extractWebRI(number);
+	webRI->ReadWebsite(webRI_vector);
 
 	cout << "正在操作网页信息..." << endl << "已完成的网页:" << endl;
 	for (int i = 0; i < num; i++)
 	{
 		webRIAnalysis(i);
 		webRISegment(i);
-		cout << i + 1 << " ";
+		//cout << i + 1 << " ";
 	}
 	cout << endl;
 }
 
 void operateWebRI::webRIAnalysis(int num)
 {
+	cout << num + 1 << " ";
 	myStack *stack = new myStack(1000);
-	analysis_list[num].addNode(webRI.Website[num]);//先加入网址
+	analysis_list[num].addNode(webRI->Website[num]);//先加入网址
 	int i = 0;
 	bool AddContent = NULL;//因为不只有一份内容，所以只添加主贴内容
 	bool AddAuthor = NULL;//只添加作者

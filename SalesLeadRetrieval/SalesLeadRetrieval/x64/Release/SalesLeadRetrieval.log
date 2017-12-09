@@ -1,15 +1,11 @@
-﻿  CP_OperateWebRI.cpp
-C:\Program Files (x86)\VC\atlmfc\include\afx.h(38): warning C4996: 'MBCS_Support_Deprecated_In_MFC': MBCS support in MFC is deprecated and may be removed in a future version of MFC.
-  C:\Program Files (x86)\VC\atlmfc\include\afx.h(33): note: 参见“MBCS_Support_Deprecated_In_MFC”的声明
-  _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
-  main.cpp
+﻿  main.cpp
 C:\Program Files (x86)\VC\atlmfc\include\afx.h(38): warning C4996: 'MBCS_Support_Deprecated_In_MFC': MBCS support in MFC is deprecated and may be removed in a future version of MFC.
   C:\Program Files (x86)\VC\atlmfc\include\afx.h(33): note: 参见“MBCS_Support_Deprecated_In_MFC”的声明
   _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
   正在生成代码
-  5 of 640 functions ( 0.8%) were compiled, the rest were copied from previous compilation.
+  4 of 668 functions ( 0.6%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    21 functions had inline decision re-evaluated but remain unchanged
+    34 functions had inline decision re-evaluated but remain unchanged
   已完成代码的生成
   SalesLeadRetrieval.vcxproj -> E:\SalesLeadRetrieval\SalesLeadRetrieval\SalesLeadRetrieval\x64\Release\SalesLeadRetrieval.exe
   SalesLeadRetrieval.vcxproj -> E:\SalesLeadRetrieval\SalesLeadRetrieval\SalesLeadRetrieval\x64\Release\SalesLeadRetrieval.pdb (Full PDB)

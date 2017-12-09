@@ -206,7 +206,7 @@ void myAVL::RLRotate(myAVLNode *a)
 	if (b->right)
 	{
 		if (!c->right)
-			b->h = 1;
+			b->h = -1;
 		else
 			b->h = 0;
 		if (!c->left)
@@ -239,7 +239,7 @@ int myAVL::adjustAVLTree(myAVLNode *p)
 		LRRotate(p);//左右形式
 	else if (p->h == -2 && p->right&&p->right->h == -1 || p->h == -2 && p->right&&p->right->h == 0)
 		RRRotate(p);//右右形式
-	else
+	else if (p->h == -2 && p->right&&p->right->h == 1)
 		RLRotate(p);//右左形式
 	return 1;
 }

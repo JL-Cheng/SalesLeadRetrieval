@@ -12,7 +12,6 @@ struct myDocumentNode
 {
 	int ID;//文档编号
 	int number;//文档中包含某一词语的个数
-	myString word_str;//分词结果
 	myString title;//标题
 	myString content;//内容
 	myString website;//网址
@@ -35,7 +34,7 @@ public:
 	myDocumentNode* searchNode(int ID);
 
 	//找到编号为ID的结点，修改文档结点内容，在函数变量中，只修改非空字符串
-	void editNode(int ID, myString word_str, myString title, myString content, myString website,int number=0);
+	void editNode(int ID, myString title, myString content, myString website,int number=0);
 
 public:
 	myDocumentNode *head;

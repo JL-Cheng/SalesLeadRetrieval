@@ -28,10 +28,12 @@ public:
 	void webRISegment(int num);
 
 private:
-	extractWebRI webRI;
+	extractWebRI *webRI;
 	myDictionary dictionary;
 	int number;//网址数量
 	vector<myString> webRI_vector;//num个网页信息的字符串向量
+
+public:
 	myStringList *analysis_list;//存储num个网页提取关键词后的结果，分别为num个链表
 	myStringList *segment_list;//存储分词之后的结果
 

@@ -1,7 +1,8 @@
 #include"CP_ExtractWebRI.h"
 
-extractWebRI::extractWebRI():
-	FileName("input/url.csv")
+extractWebRI::extractWebRI(int num):
+	FileName("input/url.csv"),
+	number(num)
 {
 	GetWebsite();	
 }
@@ -42,9 +43,9 @@ void extractWebRI::ReadWebsite(vector<myString> &str_vec)
 {
 	CInternetSession session("HttpClient");
 	cout << "正在提取网址..." << endl;
-	for (int i = 0; i < Website.size(); i++)
+	for (int i = 0; i < number; i++)
 	{
-
+		cout << i;
 		CHttpFile *pfile = (CHttpFile*)session.OpenURL(Website[i].m_str.data());
 		DWORD dwStatusCode;//Http请求相关联的状态号
 		pfile->QueryInfoStatusCode(dwStatusCode);
